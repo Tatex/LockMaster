@@ -8,76 +8,55 @@ class Asiakas extends CI_Controller {
         $this->load->model('Asiakas_model');
     }
 
-
-public function listaa() {
-	$data['asiakkaat']=$this->Asiakas_model->getAsiakas();
-	$data['sivun_sisalto']='asiakas/listaa';
-	$this->load->view('menu/sisalto',$data);
-}
-
 public function lisaa() {
 	$btn=$this->input->post('btnTallenna');
 	$lisaa_asiakas=array(
 		"etunimi"=>$this->input->post('en'),
 		"sukunimi"=>$this->input->post('sn'),
-		"email"=>$this->input->post('em')
+		"email"=>$this->input->post('em'),
+		"osoite"=>$this->input->post('os'),
+		"puh"=>$this->input->post('puh'),
+		"pinkoodi"=>$this->input->post('pin')
 		);
+
+	$pincode=$this->input->post('pin');
+
+	
 	if(isset($btn)) {
+		//Tarkistaa, että pin-koodi syötetään nelinumeroisena lukuna
+		if($pincode >= 1000 && $pincode < 9999) {
 			$lisays=$this->Asiakas_model->addAsiakas($lisaa_asiakas);
 			if($lisays>0) {
 				echo '<script>alert("Lisäys onnistui")</script>';
+			} else {
+				echo '<script>alert("Lisäys epäonnistui")</script>';
 			}
+		} else {
+			echo '<script>alert("Pin-koodi väärä, syötä luku väliltä 1000 - 9999.")</script>';
+		}
 	}
-	$data['sivun_sisalto']='asiakas/lisaa';
-	$this->load->view('menu/sisalto',$data);
-}
-
-public function nayta_poistettavat() {
-	$data['asiakkaat']=$this->Asiakas_model->getAsiakas();
-	$data['sivun_sisalto']='asiakas/poista';
-	$this->load->view('menu/sisalto',$data);
-}
-
-public function poista($id) {
-	$poista=$this->Asiakas_model->delAsiakas($id);
-	if($poista>0) {
-		echo '<script>alert("Poisto onnistui")</script>';
-	}
-
-	$data['asiakkaat']=$this->Asiakas_model->getAsiakas();
-	$data['sivun_sisalto']='asiakas/listaa';
-	$this->load->view('menu/sisalto',$data);
-}
-
-public function etsi_tilaus() {
-	$id=$this->input->post('valittu_id');
-	$btn=$this->input->post('btnEtsi');
-
-	$this->load->model('Tilaus_model');
-	$data['asiakkaat']=$this->Asiakas_model->getAsiakas();
-
-	if(isset($btn)) {
-		$data['tilaus']=$this->Tilaus_model->searchTilaus($id);
-	}
-	$data['sivun_sisalto']='asiakas/etsi_tilaus';
-	$this->load->view('menu/sisalto',$data);
+	
+	$data['page_content']='asiakas/lisaa';
+	$this->load->view('menu/content',$data);
 }
 
 public function nayta_muokattavat_asiakkaat() {
 	$data['asiakkaat']=$this->Asiakas_model->getAsiakas();
-	$data['sivun_sisalto']='asiakas/nayta_muokattavat_asiakkaat';
-	$this->load->view('menu/sisalto',$data);
+	$data['page_content']='asiakas/nayta_muokattavat_asiakkaat';
+	$this->load->view('menu/content',$data);
 }
 
 public function paivita_asiakkaat() {
 	$btn=$this->input->post('btnTallenna');
-	//jos tallenna painiketta painettu
+	//jos tallenna-painiketta painettu
 	if (isset($btn))
 	 {
 		$id=$this->input->post('id');
 		$enimi=$this->input->post('en');
 		$snimi=$this->input->post('sn');
 		$email=$this->input->post('email');
+		$osoite=$this->input->post('os');
+		$puh=$this->input->post('puh');
 
 		//lasketaan rivit
 		$lkm=0;
@@ -89,18 +68,24 @@ public function paivita_asiakkaat() {
 			$update_data= array(
 				"etunimi"=>$enimi[$x],
 				"sukunimi"=>$snimi[$x],
-				"email"=>$email[$x]
+				"email"=>$email[$x],
+				"osoite"=>$osoite[$x],
+				"puh"=>$puh[$x]
 				);
 			$testi= $this->Asiakas_model->updateAsiakas($update_data,$id[$x]);
 		}
-		$this->listaa();
+		redirect('asiakas/nayta_muokattavat_asiakkaat');
 	}
 }
 
-public function nayta_muokattava_asiakas($id) {
-	$data['asiakas']=$this->Asiakas_model->getValittuAsiakas($id);
-	$data['sivun_sisalto']='asiakas/nayta_muokattava_asiakas';
-	$this->load->view('menu/sisalto',$data);
+public function poista($id) {
+	$poista=$this->Asiakas_model->delAsiakas($id);
+	if($poista>0) {
+		echo '<script>alert("Poisto onnistui")</script>';
+	} else {
+		echo '<script>alert("Poisto epäonnistui")</script>';
+	}
+	redirect('asiakas/nayta_muokattavat_asiakkaat');
 }
 
 public function paivita_asiakas(){

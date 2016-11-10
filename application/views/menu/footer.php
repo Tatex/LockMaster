@@ -1,4 +1,4 @@
 <hr>
-Yhteystiedot: Toimitusjohtaja Jussi Juonio
+JEPS Inc.
 </body>
 </html>

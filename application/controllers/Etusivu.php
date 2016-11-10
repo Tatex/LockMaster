@@ -1,11 +1,33 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Etusivu extends CI_Controller {
 
 public function index() {
-	$data['sivun_sisalto']='etusivu/index';
-	$this->load->view('menu/sisalto',$data);
+	
 }
-
+	function __construct()
+	{
+		parent::__construct();
+	}
+ 
+ 	function index()
+ 	{
+	   if($this->session->userdata('logged_in')) {
+		    $session_data = $this->session->userdata('logged_in');
+		    $data['tunnus'] = $session_data['tunnus'];
+		    $data['page_content']='etusivu/index';
+			$this->load->view('menu/content',$data);
+	   } else {
+	    	//If no session, redirect to login page
+	    	redirect('login', 'refresh');
+	   }
+ 	}
+ 
+	function logout()
+	{
+		$this->session->unset_userdata('logged_in');
+		session_destroy();
+		redirect('home', 'refresh');
+	}
+}
 }
