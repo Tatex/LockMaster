@@ -1,10 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Etusivu extends CI_Controller {
-
-public function index() {
-	
-}
 	function __construct()
 	{
 		parent::__construct();
@@ -15,6 +11,8 @@ public function index() {
 	   if($this->session->userdata('logged_in')) {
 		    $session_data = $this->session->userdata('logged_in');
 		    $data['tunnus'] = $session_data['tunnus'];
+		    $data['etunimi'] = $session_data['etunimi'];
+		    $data['sukunimi'] = $session_data['sukunimi'];
 		    $data['page_content']='etusivu/index';
 			$this->load->view('menu/content',$data);
 	   } else {
@@ -27,7 +25,6 @@ public function index() {
 	{
 		$this->session->unset_userdata('logged_in');
 		session_destroy();
-		redirect('home', 'refresh');
+		redirect('etusivu', 'refresh');
 	}
-}
 }

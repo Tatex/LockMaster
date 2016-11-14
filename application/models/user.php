@@ -7,7 +7,7 @@ Class User extends CI_Model
         $this -> db -> from('webtiedot');
         $this -> db -> join('webvalvoja','webvalvoja.id_webvalvoja = webtiedot.id_webvalvoja');
         $this -> db -> where('tunnus', $tunnus);
-        $this -> db -> where('salasana', MD5($salasana));
+        $this -> db -> where('salasana', $salasana);
         $this -> db -> limit(1);
 
         $query = $this -> db -> get();
@@ -15,7 +15,7 @@ Class User extends CI_Model
         if($query -> num_rows() == 1) {
           return $query->result();
         } else {
-          return false;
+          return $query->result();
         }
     }
 }

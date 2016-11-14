@@ -5,7 +5,7 @@
  </head>
  <body>
    <h1>LockMaster control panel</h1>
-   <h2>Welcome <?php echo $tunnus; ?>!</h2>
+   <p>Tervetuloa <?php echo $etunimi.' '.$sukunimi; ?></p>
 
  </body>
 </html>

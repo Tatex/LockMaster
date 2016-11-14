@@ -13,8 +13,8 @@ class VerifyLogin extends CI_Controller {
    //This method will have the credentials validation
    $this->load->library('form_validation');
  
-   $this->form_validation->set_rules('tunnus', 'Tunnus', 'trim|required');
-   $this->form_validation->set_rules('salasana', 'Salasana', 'trim|required|callback_check_database');
+   $this->form_validation->set_rules('tunnus', 'Username', 'trim|required');
+   $this->form_validation->set_rules('salasana', 'Password', 'trim|required|callback_check_database');
  
    if($this->form_validation->run() == FALSE)
    {
@@ -24,7 +24,7 @@ class VerifyLogin extends CI_Controller {
    else
    {
      //Go to private area
-     redirect('home', 'refresh');
+     redirect('Etusivu', 'refresh');
    }
  
  }
@@ -36,23 +36,26 @@ class VerifyLogin extends CI_Controller {
  
    //query the database
    $result = $this->user->login($tunnus, $salasana);
- 
+
    if($result)
    {
      $sess_array = array();
      foreach($result as $row)
      {
        $sess_array = array(
-         'id_webtiedot' => $row->id,
-         'tunnus' => $row->tunnus
+         'id_webtiedot' => $row->id_webtiedot,
+         'tunnus' => $row->tunnus,
+         'etunimi' => $row->etunimi,
+         'sukunimi' => $row->sukunimi
        );
        $this->session->set_userdata('logged_in', $sess_array);
      }
-     return TRUE;
+     return true;
    }
    else
    {
      $this->form_validation->set_message('check_database', 'Invalid username or password');
+
      return false;
    }
  }
