@@ -1,0 +1,13 @@
+.dButton{
+    background:url('/LockMaster/images/kortti-deaktivoitu.png') no-repeat;
+    height:29px;
+    width:44px;
+    border:0;
+}
+
+.aButton{
+    background:url('/LockMaster/images/kortti-aktivoitu.png') no-repeat;
+    height:29px;
+    width:44px;
+    border:0;
+}
