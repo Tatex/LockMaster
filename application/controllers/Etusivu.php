@@ -10,6 +10,7 @@ class Etusivu extends CI_Controller {
  	{
 	   if($this->session->userdata('logged_in')) {
 		    $session_data = $this->session->userdata('logged_in');
+
 		    $data['tunnus'] = $session_data['tunnus'];
 		    $data['etunimi'] = $session_data['etunimi'];
 		    $data['sukunimi'] = $session_data['sukunimi'];

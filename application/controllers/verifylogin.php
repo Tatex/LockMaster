@@ -39,6 +39,7 @@ class VerifyLogin extends CI_Controller {
 
    if($result)
    {
+    // Set user data to session array to be used on the frontpage
      $sess_array = array();
      foreach($result as $row)
      {
