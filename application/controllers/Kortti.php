@@ -25,11 +25,13 @@ class Kortti extends CI_Controller {
  			$deakt = $this->input->post('btnDeaktivoi');
  			$akt = $this->input->post('btnAktivoi');
  			$id = $this->input->post('id');
+ 			$pinBtn = $this->input->post('pinSaveBtn');
+ 			$newPin = $this->input->post('textNewPin');
 
  			// Painetaan aktivoitu-painiketta
  			if (isset($deakt))
  			{
- 				// Haetaan asiakkaan id-numero hidden-riviltä
+ 				// Haetaan asiakkaan id-numero buttonin keyn avulla
  				$id_asiakas = $id[key($deakt)];
  				
  				$testi = $this->Kortti_model->updateKortti(0,$id_asiakas);
@@ -40,13 +42,24 @@ class Kortti extends CI_Controller {
  			// Painetaan deaktivoitu-painiketta
  			if (isset($akt))
  			{
- 				// Haetaan asiakkaan id-numero hidden-riviltä
+ 				// Haetaan asiakkaan id-numero buttonin keyn avulla
  				$id_asiakas = $id[key($akt)];
- 				
+ 
  				$testi = $this->Kortti_model->updateKortti(1,$id_asiakas);
 
  				redirect('kortti/nayta_kortit');
 
+ 			}
+
+ 			if (isset($pinBtn))
+ 			{
+ 				// Haetaan asiakkaan id-numero buttonin keyn avulla
+ 				$id_asiakas = $id[key($pinBtn)];
+ 				$uusiPin = $newPin[key($pinBtn)];
+
+ 				$testi = $this->Kortti_model->updatePin($uusiPin,$id_asiakas);
+
+ 				redirect('kortti/nayta_kortit');
  			}
 
 		} else {

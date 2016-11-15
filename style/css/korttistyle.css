@@ -1,13 +1,23 @@
-.dButton{
+.dButton {
     background:url('/LockMaster/images/kortti-deaktivoitu.png') no-repeat;
     height:29px;
     width:44px;
     border:0;
 }
 
-.aButton{
+.aButton {
     background:url('/LockMaster/images/kortti-aktivoitu.png') no-repeat;
     height:29px;
     width:44px;
     border:0;
+}
+
+input:read-only {
+	background:transparent;
+	outline:none;
+	border:none;
+}
+
+.pinSaveButton {
+	visibility:hidden;
 }

@@ -16,4 +16,14 @@ class Kortti_model extends CI_Model {
 		$testi=$this->db->affected_rows();
 		return $testi;
 	}
+
+	public function updatePin($pin,$id) {
+		$data = array(
+			'pinkoodi' => $pin);
+
+		$this->db->where('id_asiakas',$id);
+		$this->db->update('asiakkaat',$data);
+		$testi=$this->db->affected_rows();
+		return $testi;
+	}
 }
