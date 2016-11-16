@@ -3,6 +3,7 @@
 <head>
 <title>LockMaster Control Panel</title>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('style/css/bootstrap.min.css');?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('style/css/style.css');?>">
 </head>
 <body>
 

@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('style/css/style.css');?>">
+
 <FORM action="paivita_asiakkaat" method="POST">
 
 <?php //JavaScript osio asiakkaan poistamiselle ?>
