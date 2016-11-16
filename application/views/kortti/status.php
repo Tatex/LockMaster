@@ -1,20 +1,12 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('style/css/korttistyle.css');?>">
 
-
-
 <FORM id="korttiForm" action="paivita_kortit" method="POST">
-
-<?php 
-
-?>
 
 <TABLE class="table table-striped table-bordered">
 <TR><TH>Etunimi</TH><TH>Sukunimi</TH><TH>Yhteystiedot</TH><TH>Kortti</TH><TH>PIN-koodi</TH></TR>
-<?php
 
-// JavaScript -osio pin-koodin muokkausnapille
-echo '
-	<script type="text/javascript">
+<?php // JavaScript -osio pin-koodin muokkausnapille ?>
+<script type="text/javascript">
 	function pinChange(id,key) {
 		var clickedButton = document.getElementById(id);
 		var saveButton = document.getElementById("pinSaveButton" + key.toString());
@@ -25,9 +17,9 @@ echo '
 		saveButton.style.visibility = "visible";
 
 	}
-	</script>
-';
+</script>
 
+<?php
 foreach ($kortit as $key => $rivi) {
 	echo '<tr>';
 	echo '<td>'.$rivi['etunimi'].'</td>';

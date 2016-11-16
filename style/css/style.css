@@ -1,0 +1,12 @@
+#footer {
+	position:absolute;
+	bottom:0;
+	width:100%;
+	height:20px;   /* Height of the footer */
+	background:#ffb;
+}
+
+#companyName {
+	position:absolute;
+	right:0px;
+}
