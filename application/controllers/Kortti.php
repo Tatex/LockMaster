@@ -5,6 +5,7 @@ class Kortti extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Kortti_model');
+		$this->load->helper('url');
 	}
  
  	function nayta_kortit()
@@ -59,6 +60,7 @@ class Kortti extends CI_Controller {
 
  				$testi = $this->Kortti_model->updatePin($uusiPin,$id_asiakas);
 
+ 				$this->session->set_flashdata('success_msg','success');
  				redirect('kortti/nayta_kortit');
  			}
 

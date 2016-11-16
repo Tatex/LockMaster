@@ -6,6 +6,8 @@ class Asiakas extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('Asiakas_model');
+        $this->load->library('user_agent');
+        $this->load->helper('url');
     }
 
 public function lisaa() {
@@ -28,7 +30,9 @@ public function lisaa() {
 			if($pincode >= 1000 && $pincode < 9999) {
 				$lisays=$this->Asiakas_model->addAsiakas($lisaa_asiakas);
 				if($lisays>0) {
-					echo '<script>alert("Lisäys onnistui")</script>';
+					// Asetetaan success-viesti, jolla ilmotetaan onnistuneesta poistosta
+					$this->session->set_flashdata('success_msg','success');
+					redirect('asiakas/lisaa');
 				} else {
 					echo '<script>alert("Lisäys epäonnistui")</script>';
 				}
@@ -36,7 +40,7 @@ public function lisaa() {
 				echo '<script>alert("Pin-koodi väärä, syötä luku väliltä 1000 - 9999.")</script>';
 			}
 		}
-		
+
 		$data['page_content']='asiakas/lisaa';
 		$this->load->view('menu/content',$data);
 	} else {
@@ -47,6 +51,8 @@ public function lisaa() {
 
 public function nayta_muokattavat_asiakkaat() {
 	if($this->session->userdata('logged_in')) {
+		$data['notify'] = NULL; // Alustetaan NULL-arvo
+
 		$data['asiakkaat']=$this->Asiakas_model->getAsiakas();
 		$data['page_content']='asiakas/nayta_muokattavat_asiakkaat';
 		$this->load->view('menu/content',$data);
@@ -85,6 +91,9 @@ public function paivita_asiakkaat() {
 					);
 				$testi= $this->Asiakas_model->updateAsiakas($update_data,$id[$x]);
 			}
+
+			// Asetetaan success-viesti, jolla ilmotetaan onnistuneesta tietokantalisäyksestä
+			$this->session->set_flashdata('success_msg','success');
 			redirect('asiakas/nayta_muokattavat_asiakkaat');
 		}
 	} else {
@@ -96,11 +105,9 @@ public function paivita_asiakkaat() {
 public function poista($id) {
 	if($this->session->userdata('logged_in')) {
 		$poista=$this->Asiakas_model->delAsiakas($id);
-		if($poista>0) {
-			echo '<script>alert("Poisto onnistui")</script>';
-		} else {
-			echo '<script>alert("Poisto epäonnistui")</script>';
-		}
+
+		// Asetetaan success-viesti, jolla ilmotetaan onnistuneesta poistosta
+		$this->session->set_flashdata('success_msg','deleted');
 		redirect('asiakas/nayta_muokattavat_asiakkaat');
 	} else {
 		//If no session, redirect to login page

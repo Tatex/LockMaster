@@ -17,4 +17,5 @@
 		<li><a href="<?php echo site_url('etusivu/logout'); ?>">Kirjaudu ulos</a></li>
 	</ul>
 </div>
+
 <div id="wrapper">

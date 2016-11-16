@@ -19,6 +19,10 @@
 	}
 </script>
 
+<?php //Sisällytetään alertbox mukaan ?>
+<script type="text/javascript" src="<?php echo base_url(); ?>js/alertbox.js">
+</script>
+
 <?php
 foreach ($kortit as $key => $rivi) {
 	echo '<tr>';
@@ -61,3 +65,14 @@ foreach ($kortit as $key => $rivi) {
 ?>
 </TABLE>
 </FORM>
+
+<?php 
+
+// Jos success_msg = success (eli jos tietokantamuutos ok) 
+if($this->session->flashdata('success_msg') == "success") {
+	echo '<div class="alert">';
+	echo '<span class="alertText">Tallennus ok</span>';
+	echo '</div>';
+}
+
+?>

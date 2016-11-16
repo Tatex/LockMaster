@@ -1,3 +1,8 @@
+<?php //Sisällytetään alertbox mukaan ?>
+<script type ='text/javascript'
+		src = "<?php echo base_url();?>js/alertbox.js">
+</script>
+
 <h1>Lisää asiakas</h1>
 <form method="POST" action="lisaa">
 <label>Etunimi</label> <input type="text" name="en"> <br>
@@ -9,3 +14,13 @@
 <br>
 <input type="submit" name="btnTallenna" value="Tallenna">
 </form>
+
+
+<?php
+// Jos success_msg = success (eli jos tietokantamuutos ok)
+if($this->session->flashdata('success_msg') == "success") {
+	echo '<div class="alert">';
+	echo '<span class="alertText">Lisäys ok</span>';
+	echo '</div>';
+}
+?>

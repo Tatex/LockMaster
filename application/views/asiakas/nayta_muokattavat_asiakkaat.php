@@ -14,6 +14,11 @@
         } 
 </script>
 
+<?php //Sisällytetään alertbox mukaan ?>
+<script type ='text/javascript'
+		src = "<?php echo base_url();?>js/alertbox.js">
+</script>
+
 
 <TABLE class="table table-striped table-bordered">
 <TR><TH>Etunimi</TH><TH>Sukunimi</TH><TH>Sähköposti</TH><TH>Osoite</TH><TH>Puhelinnumero</TH></TR>
@@ -35,5 +40,22 @@ foreach ($asiakkaat as $rivi) {
 ?>
 </TABLE>
 	<input class="btn btn-primary" type="submit" name="btnTallenna" value="Tallenna" >
-	<a href="<?php echo site_url('asiakas/listaa');?>" class="btn btn-primary" role="button">Peruuta</a>
+	<a href="<?php echo site_url('asiakas/nayta_muokattavat_asiakkaat');?>" class="btn btn-primary" role="button">Peruuta</a>
 </FORM>
+
+<?php
+
+// Jos success_msg = success (eli jos tietokantamuutos ok)
+if($this->session->flashdata('success_msg') == "success") {
+	echo '<div class="alert">';
+	echo '<span class="alertText">Tallennus ok</span>';
+	echo '</div>';
+}
+
+// Jos success_msg = deleted (eli jos tietokantapoisto ok)
+if($this->session->flashdata('success_msg') == "deleted") {
+	echo '<div class="alert">';
+	echo '<span class="alertText">Poisto ok</span>';
+	echo '</div>';
+}
+?>

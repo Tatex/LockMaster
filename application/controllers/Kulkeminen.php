@@ -5,6 +5,7 @@ class Kulkeminen extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Kulkeminen_model');
+		$this->load->helper('url');
 	}
  
  	function nayta_kulkemiset()

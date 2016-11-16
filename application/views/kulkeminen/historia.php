@@ -8,8 +8,12 @@ foreach ($kulkemiset as $rivi) {
 	$paivays = DateTime::createFromFormat("Y-m-d", $rivi['pvm']);
 	$aika = DateTime::createFromFormat("H:i:s", $rivi['aika']);
 
+	// Format dd.mm.yy muotoon
 	echo '<td>'.$paivays->format("d.m.Y").'</td>';
+
+	// Format hh:mm muotoon
 	echo '<td>'.$aika->format("H:i").'</td>';
+	
 	echo '<td>'.$rivi['etunimi'].' '.$rivi['sukunimi'].'</td>';
 
 	if ($rivi['ovi_auki'])
