@@ -2,7 +2,7 @@
 class Kortti_model extends CI_Model {
 
 	public function getKortti() {
-		$this->db->select('id_asiakas,etunimi,sukunimi,puh,aktivoitu,pinkoodi');
+		$this->db->select('id_asiakas,etunimi,sukunimi,puh,aktivoitu,pinkoodi, email');
 		$this->db->from('asiakkaat');
 		return $this->db->get()->result_array();
 	} 

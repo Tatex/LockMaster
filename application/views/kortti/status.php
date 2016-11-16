@@ -9,7 +9,7 @@
 ?>
 
 <TABLE class="table table-striped table-bordered">
-<TR><TH>Etunimi</TH><TH>Sukunimi</TH><TH>Puhelinnumero</TH><TH>Kortti</TH><TH>PIN-koodi</TH></TR>
+<TR><TH>Etunimi</TH><TH>Sukunimi</TH><TH>Yhteystiedot</TH><TH>Kortti</TH><TH>PIN-koodi</TH></TR>
 <?php
 
 // JavaScript -osio pin-koodin muokkausnapille
@@ -32,7 +32,16 @@ foreach ($kortit as $key => $rivi) {
 	echo '<tr>';
 	echo '<td>'.$rivi['etunimi'].'</td>';
 	echo '<td>'.$rivi['sukunimi'].'</td>';
-	echo '<td>'.$rivi['puh'].'</td>';
+
+	echo '<td>';
+	if ($rivi['email'])
+		echo '<div class="contactInfo"><img src="/LockMaster/images/email-icon.png" class="emailIcon">'.$rivi['email'].'</div>';
+	if ($rivi['puh'] && $rivi['email'])
+		echo '<div class="contactInfo"><img src="/LockMaster/images/phone-icon.png" class="phoneIcon">'.$rivi['puh'].'</div>';
+	else if ($rivi['puh'])
+		echo '<div class="contactInfo"><img src="/LockMaster/images/phone-icon.png" class="phoneIcon">'.$rivi['puh'].'</div>';
+
+	echo '</td>';
 	
 	// Näytetään joko aktiivinen tai deaktiivinen nappi, joka sitten deaktivoi tai aktivoi kortin
 	if ($rivi['aktivoitu'] == 1) {
