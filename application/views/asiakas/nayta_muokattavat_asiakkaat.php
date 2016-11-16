@@ -2,24 +2,6 @@
 
 <FORM action="paivita_asiakkaat" method="POST">
 
-<?php //JavaScript osio asiakkaan poistamiselle ?>
-<script type="text/javascript">
-    var url="<?php echo base_url();?>";
-    function poista(id){
-       var r=confirm("Haluatko varmasti poistaa asiakkaan?")
-        if (r==true)
-          window.location = url+"index.php/asiakas/poista/"+id;
-        else
-          return false;
-        } 
-</script>
-
-<?php //Sisällytetään alertbox mukaan ?>
-<script type ='text/javascript'
-		src = "<?php echo base_url();?>js/alertbox.js">
-</script>
-
-
 <TABLE class="table table-striped table-bordered">
 <TR><TH>Etunimi</TH><TH>Sukunimi</TH><TH>Sähköposti</TH><TH>Osoite</TH><TH>Puhelinnumero</TH></TR>
 <?php
@@ -59,3 +41,20 @@ if($this->session->flashdata('success_msg') == "deleted") {
 	echo '</div>';
 }
 ?>
+
+<?php //JavaScript osio asiakkaan poistamiselle ?>
+<script type="text/javascript">
+    var url="<?php echo base_url();?>";
+    function poista(id){
+       var r=confirm("Haluatko varmasti poistaa asiakkaan?")
+        if (r==true)
+          window.location = url+"index.php/asiakas/poista/"+id;
+        else
+          return false;
+        } 
+</script>
+
+<?php //Sisällytetään alertbox mukaan ?>
+<script type ='text/javascript'
+		src = "<?php echo base_url();?>js/alertbox.js">
+</script>

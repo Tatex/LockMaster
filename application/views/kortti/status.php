@@ -5,24 +5,6 @@
 <TABLE class="table table-striped table-bordered">
 <TR><TH>Etunimi</TH><TH>Sukunimi</TH><TH>Yhteystiedot</TH><TH>Kortti</TH><TH>PIN-koodi</TH></TR>
 
-<?php // JavaScript -osio pin-koodin muokkausnapille ?>
-<script type="text/javascript">
-	function pinChange(id,key) {
-		var clickedButton = document.getElementById(id);
-		var saveButton = document.getElementById("pinSaveButton" + key.toString());
-		var pinText = document.getElementById("pinChangeText" + key.toString());
-
-		pinText.readOnly = false;
-		clickedButton.type = "hidden";
-		saveButton.style.visibility = "visible";
-
-	}
-</script>
-
-<?php //Sisällytetään alertbox mukaan ?>
-<script type="text/javascript" src="<?php echo base_url(); ?>js/alertbox.js">
-</script>
-
 <?php
 foreach ($kortit as $key => $rivi) {
 	echo '<tr>';
@@ -76,3 +58,21 @@ if($this->session->flashdata('success_msg') == "success") {
 }
 
 ?>
+
+<?php // JavaScript -osio pin-koodin muokkausnapille ?>
+<script type="text/javascript">
+	function pinChange(id,key) {
+		var clickedButton = document.getElementById(id);
+		var saveButton = document.getElementById("pinSaveButton" + key.toString());
+		var pinText = document.getElementById("pinChangeText" + key.toString());
+
+		pinText.readOnly = false;
+		clickedButton.type = "hidden";
+		saveButton.style.visibility = "visible";
+	}
+</script>
+
+<?php //Sisällytetään alertbox mukaan ?>
+<script type="text/javascript" 
+		src="<?php echo base_url(); ?>js/alertbox.js">
+</script>
