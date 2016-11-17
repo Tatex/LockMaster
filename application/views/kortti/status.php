@@ -40,7 +40,7 @@ foreach ($kortit as $key => $rivi) {
 	echo '<input type="submit" class="pinSaveButton" id="pinSaveButton'.$key.'" name="pinSaveBtn['.$key.']" value="Tallenna"></td>';
 
 	// Piilotettu id-tieto
-	echo '<input type="hidden" name="id['.$key.']" value="'.$rivi['id_asiakas'].'">';
+	echo '<input type="hidden" name="id['.$key.']" value="'.$rivi['id_kortti'].'">';
 	echo '</tr>';
 
 }

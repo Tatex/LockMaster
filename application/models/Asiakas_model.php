@@ -7,6 +7,19 @@ class Asiakas_model extends CI_Model {
 		return $this->db->get()->result_array();
 	} 
 
+	public function getKaytetytKortit() {
+		$this->db->select('kortti.id_kortti');
+		$this->db->from('asiakkaat');
+		$this->db->join('kortti','kortti.id_kortti=asiakkaat.id_kortti');
+		return $this->db->get()->result_array();
+	}
+
+	public function getKaikkiKortit() {
+		$this->db->select('id_kortti');
+		$this->db->from('kortti');
+		return $this->db->get()->result_array();
+	}
+
 	public function addAsiakas($lisaa_asiakas) {
 		$this->db->set($lisaa_asiakas);
 		$this->db->insert('asiakkaat');

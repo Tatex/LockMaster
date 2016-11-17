@@ -12,19 +12,22 @@ class Asiakas extends CI_Controller {
 
 public function lisaa() {
 	if($this->session->userdata('logged_in')) {
+		$data['kaikkiKortit']=$this->Asiakas_model->getKaikkiKortit();
+		$data['kaytetytKortit']=$this->Asiakas_model->getKaytetytKortit();
+		
 		$btn=$this->input->post('btnTallenna');
+
 		$lisaa_asiakas=array(
 			"etunimi"=>$this->input->post('en'),
 			"sukunimi"=>$this->input->post('sn'),
 			"email"=>$this->input->post('em'),
 			"osoite"=>$this->input->post('os'),
-			"puh"=>$this->input->post('puh'),
-			"pinkoodi"=>$this->input->post('pin')
+			"puh"=>$this->input->post('puh')
 			);
 
-		$pincode=$this->input->post('pin');
+		$kortti = $this->input->post('kortti_id');
+		$pinkoodi = $this->input->post('pin');
 
-		
 		if(isset($btn)) {
 			//Tarkistaa, että pin-koodi syötetään nelinumeroisena lukuna
 			if($pincode >= 1000 && $pincode < 9999) {

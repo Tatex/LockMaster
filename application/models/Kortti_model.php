@@ -2,8 +2,9 @@
 class Kortti_model extends CI_Model {
 
 	public function getKortti() {
-		$this->db->select('id_asiakas,etunimi,sukunimi,puh,aktivoitu,pinkoodi, email');
-		$this->db->from('asiakkaat');
+		$this->db->select('id_asiakas,kortti.id_kortti,etunimi,sukunimi,puh,email,nro,aktivoitu,pinkoodi');
+		$this->db->from('kortti');
+		$this->db->join('asiakkaat','kortti.id_kortti = asiakkaat.id_kortti');
 		return $this->db->get()->result_array();
 	} 
 
@@ -11,8 +12,8 @@ class Kortti_model extends CI_Model {
 		$data = array(
 			'aktivoitu' => $active);
 
-		$this->db->where('id_asiakas',$id);
-		$this->db->update('asiakkaat',$data);
+		$this->db->where('id_kortti',$id);
+		$this->db->update('kortti',$data);
 		$testi=$this->db->affected_rows();
 		return $testi;
 	}
@@ -21,8 +22,8 @@ class Kortti_model extends CI_Model {
 		$data = array(
 			'pinkoodi' => $pin);
 
-		$this->db->where('id_asiakas',$id);
-		$this->db->update('asiakkaat',$data);
+		$this->db->where('id_kortti',$id);
+		$this->db->update('kortti',$data);
 		$testi=$this->db->affected_rows();
 		return $testi;
 	}

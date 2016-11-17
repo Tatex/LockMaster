@@ -32,10 +32,10 @@ class Kortti extends CI_Controller {
  			// Painetaan aktivoitu-painiketta
  			if (isset($deakt))
  			{
- 				// Haetaan asiakkaan id-numero buttonin keyn avulla
- 				$id_asiakas = $id[key($deakt)];
+ 				// Haetaan kortin id-numero buttonin keyn avulla
+ 				$id_kortti = $id[key($deakt)];
  				
- 				$testi = $this->Kortti_model->updateKortti(0,$id_asiakas);
+ 				$testi = $this->Kortti_model->updateKortti(0,$id_kortti);
 
  				redirect('kortti/nayta_kortit');
  			}
@@ -43,10 +43,10 @@ class Kortti extends CI_Controller {
  			// Painetaan deaktivoitu-painiketta
  			if (isset($akt))
  			{
- 				// Haetaan asiakkaan id-numero buttonin keyn avulla
- 				$id_asiakas = $id[key($akt)];
+ 				// Haetaan kortin id-numero buttonin keyn avulla
+ 				$id_kortti = $id[key($akt)];
  
- 				$testi = $this->Kortti_model->updateKortti(1,$id_asiakas);
+ 				$testi = $this->Kortti_model->updateKortti(1,$id_kortti);
 
  				redirect('kortti/nayta_kortit');
 
@@ -54,11 +54,11 @@ class Kortti extends CI_Controller {
 
  			if (isset($pinBtn))
  			{
- 				// Haetaan asiakkaan id-numero buttonin keyn avulla
- 				$id_asiakas = $id[key($pinBtn)];
+ 				// Haetaan kortin id-numero buttonin keyn avulla
+ 				$id_kortti = $id[key($pinBtn)];
  				$uusiPin = $newPin[key($pinBtn)];
 
- 				$testi = $this->Kortti_model->updatePin($uusiPin,$id_asiakas);
+ 				$testi = $this->Kortti_model->updatePin($uusiPin,$id_kortti);
 
  				$this->session->set_flashdata('success_msg','success');
  				redirect('kortti/nayta_kortit');
