@@ -2,7 +2,7 @@
 var close = document.getElementsByClassName("alert");
 var i;
 
-setTimeout(function(){ close[0].style.display = "none"; }, 1000);
+setTimeout(function(){ close[0].style.display = "none"; }, 2000);
 
 for (i = 0; i < close.length; i++) {
     close[i].onclick = function(){

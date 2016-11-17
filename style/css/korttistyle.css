@@ -42,6 +42,15 @@ input:read-only {
 	visibility:hidden;
 }
 
-table.table {
+.cardSaveButton {
+    visibility:hidden;
+    margin-left:10px;
+}
 
+.cardChangeButton {
+    margin-left:10px;   
+}
+
+.cardIdText {
+margin-left:5px;
 }

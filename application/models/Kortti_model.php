@@ -27,4 +27,11 @@ class Kortti_model extends CI_Model {
 		$testi=$this->db->affected_rows();
 		return $testi;
 	}
+
+	public function updateAsiakas($update_data,$id) {
+		$this->db->where('id_kortti',$id);
+		$this->db->update('asiakkaat',$update_data);
+		$testi=$this->db->affected_rows();
+		return $testi;
+	}
 }

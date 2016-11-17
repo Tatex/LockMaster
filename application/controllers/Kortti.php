@@ -29,6 +29,8 @@ class Kortti extends CI_Controller {
  			$deakt = $this->input->post('btnDeaktivoi');
  			$akt = $this->input->post('btnAktivoi');
  			$id = $this->input->post('id');
+ 			$cardBtn = $this->input->post('cardSaveBtn');
+ 			$cardSelect = $this->input->post('korttiSelector');
  			$pinBtn = $this->input->post('pinSaveBtn');
  			$newPin = $this->input->post('textNewPin');
 
@@ -51,6 +53,24 @@ class Kortti extends CI_Controller {
  
  				$testi = $this->Kortti_model->updateKortti(1,$id_kortti);
 
+ 				redirect('kortti/nayta_kortit');
+
+ 			}
+
+ 			// Painetaan tallenna-painiketta kortin vaihdossa
+ 			if (isset($cardBtn))
+ 			{
+ 				// Haetaan kortin id-numero buttonin keyn avulla
+ 				$id_kortti = $id[key($cardBtn)];
+ 				$id_uusi_kortti = $cardSelect[key($cardBtn)];
+
+ 				$update_data= array(
+					"id_kortti"=>$id_uusi_kortti
+					);
+
+ 				$testi = $this->Kortti_model->updateAsiakas($update_data,$id_kortti);
+
+ 				$this->session->set_flashdata('success_msg','success');
  				redirect('kortti/nayta_kortit');
 
  			}
