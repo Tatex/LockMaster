@@ -30,7 +30,7 @@ echo '</select>';
 ?>
 <br>
 
-<label>Kulkukortin PIN-koodi</label> <br><input size="10px" type="text" name="pin"> <br>
+<label>Kulkukortin PIN-koodi</label> <br><input size="4" maxlength="4" min="4"  type="text" name="pin"> <br>
 <br>
 <input type="submit" name="btnTallenna" value="Tallenna">
 </form>
