@@ -51,8 +51,6 @@ public function lisaa() {
 
 public function nayta_muokattavat_asiakkaat() {
 	if($this->session->userdata('logged_in')) {
-		$data['notify'] = NULL; // Alustetaan NULL-arvo
-
 		$data['asiakkaat']=$this->Asiakas_model->getAsiakas();
 		$data['page_content']='asiakas/nayta_muokattavat_asiakkaat';
 		$this->load->view('menu/content',$data);
