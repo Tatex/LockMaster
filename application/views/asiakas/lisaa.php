@@ -12,23 +12,6 @@
 <label>Puhelinnumero</label> <input type="text" name="puh"> <br><br>
 
 <?php // Haetaan kaikista korteista ne, jotka eivät ole käytössä
-
-	// Muutetaan moniulotteinen kaikkiKortit-taulukko yksiulotteiseksi tmpKaikki-taulukoksi
-	foreach($kaikkiKortit as $subArray){
-	    foreach($subArray as $val){
-	        $tmpKaikki[] = $val;
-	    }
-	}
-
-	// Muutetaan moniulotteinen kaikkiKortit-taulukko yksiulotteiseksi tmpKaikki-taulukoksi
-	foreach($kaytetytKortit as $subArray){
-	    foreach($subArray as $val){
-	        $tmpKaytetyt[] = $val;
-	    }
-	}
-
-	// Verrataan taulukkoja ja poistetaan yhteiset tietueet (eli jäljelle jää ne korttien id:t, jotka eivät ole vielä asiakkailla käytössä)
-	$vapaatKortit = array_diff($tmpKaikki,$tmpKaytetyt);
 ?>
 
 <label>Kulkukortti</label>

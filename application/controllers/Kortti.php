@@ -11,6 +11,9 @@ class Kortti extends CI_Controller {
  	function nayta_kortit()
  	{
 	   if($this->session->userdata('logged_in')) {
+	   		$this->load->model('Asiakas_model');
+	   		$data['vapaatKortit'] = $this->Asiakas_model->getVapaatKortit();
+
 	   		$data['kortit']=$this->Kortti_model->getKortti();
 		    $data['page_content']='kortti/status';
 			$this->load->view('menu/content',$data);

@@ -7,17 +7,34 @@ class Asiakas_model extends CI_Model {
 		return $this->db->get()->result_array();
 	} 
 
-	public function getKaytetytKortit() {
+	public function getVapaatKortit() {
+		$this->db->select('id_kortti');
+		$this->db->from('kortti');
+		$kaikkiKortit = $this->db->get()->result_array();
+
+		// Muutetaan moniulotteinen kaikkiKortit-taulukko yksiulotteiseksi tmpKaikki-taulukoksi
+		foreach($kaikkiKortit as $subArray){
+		    foreach($subArray as $val){
+		        $tmpKaikki[] = $val;
+		    }
+		}
+
 		$this->db->select('kortti.id_kortti');
 		$this->db->from('asiakkaat');
 		$this->db->join('kortti','kortti.id_kortti=asiakkaat.id_kortti');
-		return $this->db->get()->result_array();
-	}
+		$kaytetytKortit = $this->db->get()->result_array();
 
-	public function getKaikkiKortit() {
-		$this->db->select('id_kortti');
-		$this->db->from('kortti');
-		return $this->db->get()->result_array();
+		// Muutetaan moniulotteinen kaikkiKortit-taulukko yksiulotteiseksi tmpKaikki-taulukoksi
+		foreach($kaytetytKortit as $subArray){
+		    foreach($subArray as $val) {
+		        $tmpKaytetyt[] = $val;
+		    }
+		}
+
+		// Verrataan taulukkoja ja poistetaan yhteiset tietueet (eli jäljelle jää ne korttien id:t, jotka eivät ole vielä asiakkailla käytössä)
+		$vapaatKortit = array_diff($tmpKaikki,$tmpKaytetyt);
+
+		return $vapaatKortit;
 	}
 
 	public function addAsiakas($lisaa_asiakas) {
