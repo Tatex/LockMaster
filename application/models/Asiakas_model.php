@@ -37,10 +37,18 @@ class Asiakas_model extends CI_Model {
 		return $vapaatKortit;
 	}
 
-	public function addAsiakas($lisaa_asiakas) {
+	public function addAsiakas($lisaa_asiakas,$korttidata) {
 		$this->db->set($lisaa_asiakas);
 		$this->db->insert('asiakkaat');
 		$testi=$this->db->affected_rows();
+
+		// Muokkaa kortin pin-koodia
+		if ($testi) {
+			$this->db->where('id_kortti',$korttidata['id_kortti']);
+			$this->db->update('kortti',$korttidata);
+			$testi=$this->db->affected_rows();
+		}
+
 		return $testi;
 	}
 

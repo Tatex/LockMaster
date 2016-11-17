@@ -24,14 +24,15 @@ public function lisaa() {
 			"puh"=>$this->input->post('puh'),
 			"id_kortti"=>$this->input->post('kortti_id')
 			);
-
-		$kortti = $this->input->post('kortti_id');
-		$pinkoodi = $this->input->post('pin');
+		$korttidata=array(
+			"id_kortti"=>$this->input->post('kortti_id'),
+			"pinkoodi"=>$this->input->post('pin')
+			);
 
 		if(isset($btn)) {
 			//Tarkistaa, että pin-koodi syötetään nelinumeroisena lukuna
-			if($pinkoodi >= 1000 && $pinkoodi < 9999) {
-				$lisays=$this->Asiakas_model->addAsiakas($lisaa_asiakas);
+			if($korttidata['pinkoodi'] >= 1000 && $korttidata['pinkoodi'] < 9999) {
+				$lisays=$this->Asiakas_model->addAsiakas($lisaa_asiakas,$korttidata);
 				if($lisays>0) {
 					// Asetetaan success-viesti, jolla ilmotetaan onnistuneesta poistosta
 					$this->session->set_flashdata('success_msg','success');
