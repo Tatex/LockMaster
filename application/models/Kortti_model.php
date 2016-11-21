@@ -34,4 +34,9 @@ class Kortti_model extends CI_Model {
 		$testi=$this->db->affected_rows();
 		return $testi;
 	}
+	public function addKortti($lisaa_kortti){
+
+		$this->db->set($lisaa_kortti);
+		$this->db->insert('kortti');
+	}
 }

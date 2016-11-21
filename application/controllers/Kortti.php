@@ -92,4 +92,37 @@ class Kortti extends CI_Controller {
 			redirect('login', 'refresh');
 		}
  	}
+ 	public function lisaakortti(){
+
+ 		if($this->session->userdata('logged_in')) {
+
+ 			$btn2 = $this->input->post('btnTallennakortti');
+
+ 			$lisaa_kortti=array(
+ 				"nro"=>$this->input->post('num'),
+ 				"pinkoodi"=>$this->input->post('pincode'),
+ 				
+ 				
+ 				);
+ 		if (isset($btn2))
+
+ 		{
+ 			if($lisaa_kortti['pinkoodi']>=1000 && $lisaa_kortti['pinkoodi'] < 9999){
+
+ 				$lisays2=$this->Kortti_model->addKortti($lisaa_kortti);
+
+ 				echo '<script>alert("Kortin lisäys onnistui")</script>';
+
+ 			}
+
+ 			else{
+
+ 				echo '<script>alert("Pin-koodi väärä, syötä luku väliltä 1000 - 9999.")</script>';
+ 			}
+ 		}
+
+ 		$data['page_content']='kortti/lisaakortti';
+		$this->load->view('menu/content',$data);
+ 	}
+}
 }
