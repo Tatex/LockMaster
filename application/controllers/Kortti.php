@@ -100,15 +100,24 @@ class Kortti extends CI_Controller {
 
  			$lisaa_kortti=array(
  				"nro"=>$this->input->post('num'),
+ 				"pinkoodi"=>$this->input->post('pinc')
  				
  				
  				);
  		if (isset($btn2))
 
  		{
+ 			if($lisaa_kortti['pinkoodi'] >= 1000 && $lisaa_kortti['pinkoodi'] < 9999) {
+ 				
  				$lisays2=$this->Kortti_model->addKortti($lisaa_kortti);
 
  				echo '<script>alert("Kortin lisäys onnistui")</script>';
+
+ 			}
+ 			else
+ 			{
+ 				echo '<script>alert("Pinkoodi väärin")</script>';
+ 			}
 
  			}
 
